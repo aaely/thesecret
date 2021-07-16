@@ -1,4 +1,4 @@
-import { FunctionComponent, MutableRefObject, useRef, useEffect } from "react";
+import { FunctionComponent, MutableRefObject, useRef } from "react";
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { Button, Table } from "react-bootstrap";
 import { eBookDims, activePage, activeChapter, getPageCount, getChapterCount, chapterSelector, pageSelector } from '../Recoil/eBook'

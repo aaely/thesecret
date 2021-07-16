@@ -1,7 +1,7 @@
+import { FunctionComponent } from 'react'
 import { useRecoilState } from 'recoil'
 import { currentView } from '../Recoil/views'
 import { Button } from 'react-bootstrap'
-import { FunctionComponent } from '../../../.cache/typescript/4.4/node_modules/@types/react'
 
 const AboutThisApp: FunctionComponent = (props:any) => {
 

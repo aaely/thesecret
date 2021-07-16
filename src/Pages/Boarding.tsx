@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FunctionComponent } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { Button } from 'react-bootstrap'
 import { editorText } from '../Recoil'
 import { currentView } from '../Recoil/views'
-import { FunctionComponent } from '../../../.cache/typescript/4.4/node_modules/@types/react'
 
 const Boarding: FunctionComponent = (props:any) => {
 
