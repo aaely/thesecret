@@ -1,14 +1,12 @@
-import { useState, useRef, useEffect, MouseEventHandler } from 'react'
+import { useState, useEffect } from 'react'
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil'
 import { Button } from 'react-bootstrap'
 import { forceUpdate, initializeeBook, account, getAccount, getChapterCount, activeChapter } from '../Recoil/eBook'
-import { editorText, width } from '../Recoil'
+import { editorText } from '../Recoil'
 import { currentView } from '../Recoil/views'
 import { FunctionComponent } from '../../../.cache/typescript/4.4/node_modules/@types/react'
 import { useSpring, useTransition } from "@react-spring/core";
 import MyEditor from '../Components/MyEditor'
-import ReadOnlyEditor from '../Components/ReadOnlyEditor'
-import { Chapter } from '../types/types'
 
 const Landing: FunctionComponent = (props:any) => {
 
