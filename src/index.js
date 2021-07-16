@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RecoilRoot } from 'recoil'
+import Loader from './Components/Loader'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+localStorage.clear()
 
 ReactDOM.render(
+  
   <React.StrictMode>
-    <App />
+    <RecoilRoot>
+      <Suspense fallback={<Loader type={'circles'} />}>
+      <App />
+      </Suspense>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
