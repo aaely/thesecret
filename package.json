@@ -60,5 +60,6 @@
     "@types/gestalt": "^27.2.0",
     "@types/html-to-draftjs": "^1.4.0",
     "@types/react-draft-wysiwyg": "^1.13.2"
-  }
+  },
+  "homepage": "./"
 }
