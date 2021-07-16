@@ -15,7 +15,7 @@ const { persistAtom } = recoilPersist({
     get: async () => {
             try {
                 await loadWeb3()
-                const response = await loadeBook();
+                const response: any = await loadeBook();
                 return response.methods
             } catch (error) {
                 console.log(error)
@@ -64,7 +64,7 @@ const { persistAtom } = recoilPersist({
         get: async ({get}) => {
             try {
                 get(forceUpdate)
-                const methods = get(initializeeBook)
+                const methods: any = get(initializeeBook)
                 const response = await methods.chapterCount().call()
                 console.log(response)
                 return response
@@ -79,7 +79,7 @@ const { persistAtom } = recoilPersist({
         get: async ({get}) => {
             try {
                 get(forceUpdate)
-                const methods = get(initializeeBook)
+                const methods: any = get(initializeeBook)
                 const response = await methods.pageCount().call()
                 return response
             } catch(error) {
@@ -93,7 +93,7 @@ const { persistAtom } = recoilPersist({
         get: param => async ({get}) => {
             try {
                 get(forceUpdate)
-                const methods = get(initializeeBook)
+                const methods: any = get(initializeeBook)
                 const response = await methods.fetchChapter(param).call()
                 return response
             } catch (error) {
@@ -107,7 +107,7 @@ const { persistAtom } = recoilPersist({
         get: param => async ({get}) => {
             try {
                 get(forceUpdate)
-                const methods = get(initializeeBook)
+                const methods: any = get(initializeeBook)
                 const response = await methods.getPage(param).call()
                 return response
             } catch (error) {
@@ -125,10 +125,10 @@ const { persistAtom } = recoilPersist({
         key: 'getAllChapters',
         get: async ({get}) => {
             try {
-                let chapters = []
-                const methods = get(initializeeBook)
+                let chapters: any = []
+                const methods: any = get(initializeeBook)
                 console.log(methods)
-                const loopCount = get(getChapterCount)
+                const loopCount: any = get(getChapterCount)
                 for(let i: number = 1; i <= loopCount; i++) {
                     const chapter = await methods.fetchChapter(i).call()
                     chapters.push(chapter)

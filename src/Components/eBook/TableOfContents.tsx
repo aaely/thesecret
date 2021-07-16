@@ -1,6 +1,6 @@
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useRecoilState } from 'recoil'
 import { width } from '../../Recoil'
-import { getAllChapters, activePage } from '../../Recoil/eBook'
+import { getAllChapters, activePage, activeChapter } from '../../Recoil/eBook'
 import { Chapter } from '../../types/types'
 import { Button, Table } from 'react-bootstrap'
 
@@ -8,7 +8,13 @@ const TableOfContents: Function = (props: any) => {
 
     const chapters = useRecoilValue(getAllChapters)
     const screenWidth: number = useRecoilValue(width)
-    const page: number = useRecoilValue(activePage)
+    const [page, setPage] = useRecoilState<number>(activePage)
+    const [chapt, setChapt] = useRecoilState(activeChapter)
+
+    const jumpToChapter = (selectedChapter: any, firstPageOfChapter: any) => {
+        setChapt(parseInt(selectedChapter))
+        setPage(parseInt(firstPageOfChapter))
+    }
     
     const renderTable = () => {
         return(
@@ -30,15 +36,15 @@ const TableOfContents: Function = (props: any) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {chapters && chapters.map((chapter) => {
+                    {chapters && chapters.map((chapter: Chapter) => {
                         console.log(chapters)
                         return(
-                            <tr>
+                            <tr key={chapter.chapterId}>
                                 <td>
                                     {chapter.chapterId}
                                 </td>
                                 <td>
-                                    {chapter.title}
+                                    <Button variant='link' onClick={() => jumpToChapter(chapter.chapterId, chapter.pages[0])}>{chapter.title}</Button>
                                 </td>
                                 <td>
                                     {chapter.description}

@@ -13,24 +13,22 @@ const EBook: FunctionComponent = (props:any) => {
     const eBookRef: MutableRefObject<any> = useRef(null)
     useEBookViewport(eBookRef)
     const [view, setView] = useRecoilState<string>(currentView)
-    const [page, setPage] = useRecoilState<number>(activePage)
-    const [chapt, setChapt] = useRecoilState<number>(activeChapter)
+    const [page, setPage] = useRecoilState<any>(activePage)
+    const [chapt, setChapt] = useRecoilState<any>(activeChapter)
     const totalChapters: number = useRecoilValue(getChapterCount)
     const totalPages: number = useRecoilValue(getPageCount)
     const dims = useRecoilValue(eBookDims)
 
-    const currentPage: Page = useRecoilValue(pageSelector(page))
-    const currentChapt: Chapter = useRecoilValue(chapterSelector(chapt))
+    const currentPage: any = useRecoilValue(pageSelector(page))
+    const currentChapt: any = useRecoilValue(chapterSelector(chapt))
     console.log(currentChapt)
 
     const handleEvent = (event: string) => {
         switch(event) {
             case 'nextPage': {
-                console.log(page, chapt)
                 if(currentChapt.pages[currentChapt.pages.length - 1] == page){
-                    setPage(page + 1)
-                    setChapt(chapt + 1)
-                    console.log(page, chapt)
+                    setPage(parseInt(page) + 1)
+                    setChapt(parseInt(chapt) + 1)
                     break;
                 }
                 if(page === 0) {

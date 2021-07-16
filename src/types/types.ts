@@ -20,7 +20,7 @@ interface EventTarget {
 
 export type Chapter = {
     chapterId: number,
-    pages: number[],
+    pages: [number],
     title: string,
     description: string
 }
@@ -39,14 +39,14 @@ export type eBook = {
     newestVersionHash: string,
     coverImageHash: string,
     title: string,
-    chapters: Chapter[],
-    pages: Page[],
+    chapters: [Chapter],
+    pages: [Page],
     legalDisclaimer: string
 }
 
 export const chapterConstructor = (): Chapter => ({
     'chapterId': 0,
-    'pages': [],
+    'pages': [0],
     'title': '',
     'description': ''
 })
