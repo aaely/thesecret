@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, FunctionComponent } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { FunctionComponent } from '../../../.cache/typescript/4.4/node_modules/@types/react'
 import { editorText } from '../Recoil'
 import { initializeeBook, workingChapter } from '../Recoil/eBook'
 import { currentView } from '../Recoil/views'
