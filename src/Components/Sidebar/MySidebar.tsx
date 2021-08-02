@@ -45,8 +45,7 @@ const MySidebar: FunctionComponent = (props: any) => {
 
     return (
         <ProSidebar
-        style={{position: 'fixed', maxWidth: `${sWidth}`}}
-        image={image ? sidebarBg : false}
+        style={{position: 'fixed'}}
         rtl={rtl}
         collapsed={collapsed}
         toggled={toggled}
