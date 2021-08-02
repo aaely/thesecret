@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { bgImage, sidebarWidth as s, rtl as r, toggled as t } from './Recoil/sidebar'
 import useViewport from './utils/useViewport'
+import { derivedWidth as d } from './Recoil';
 import Landing from './Pages/Landing';
 import { currentView } from './Recoil/views'
 import { useRecoilValue } from 'recoil'
@@ -18,17 +19,33 @@ import Static from './Pages/Static';
 function App() {
 
   //useWebsocket()
-  const derivedWidth: number = useViewport()
+  useViewport()
 
   const sWidth: number = useRecoilValue(s)
   const rtl: boolean = useRecoilValue(r)
   const toggled: boolean = useRecoilValue(t)
   const view: string = useRecoilValue(currentView)
+  const derivedWidth: number = useRecoilValue(d)
 
-  return (
-    <div style={{overflowX: 'hidden'}} className={`app ${rtl ? 'rtl' : ''} ${toggled ? 'toggled' : ''}`}>
+  const renderMobile: Function = () => {
+    return(
+      <>
+        {view === 'landing' && <Landing />}
+        {view === 'boarding' && <Boarding />}
+        {view === 'pagepreview' && <PagePreview />}
+        {view === 'ebook' && <EBook />}
+        {view === 'editpage' && <EditPage />}
+        {view === 'about' && <AboutThisApp />}
+        {view === 'static' && <Static />}
+      </>
+    )
+  }
+
+  const renderDesktop: Function = () => {
+    return(
+      <div style={{overflowX: 'hidden'}} className={`app ${rtl ? 'rtl' : ''} ${toggled ? 'toggled' : ''}`}>
       <MySidebar />
-      <div style={{width: `${derivedWidth}px`, transform: `translate(${sWidth}px, 0)`, transition: 'transform .15s linear', marginLeft: `${sWidth}`}}>
+      <div style={{width: `${derivedWidth}px`, transform: `translate(${sWidth}px, 0)`, transition: 'transform .15s linear'}}>
         {view === 'landing' && <Landing />}
         {view === 'boarding' && <Boarding />}
         {view === 'pagepreview' && <PagePreview />}
@@ -38,6 +55,14 @@ function App() {
         {view === 'static' && <Static />}
       </div>
     </div>
+    )
+  }
+
+  return (
+    <>
+      {derivedWidth > 400 && renderDesktop()}
+      {derivedWidth <= 400 && renderMobile()}
+    </>
   );
 }
 

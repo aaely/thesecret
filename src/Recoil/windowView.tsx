@@ -15,3 +15,8 @@ export const height = atom<number>({
     key: 'height',
     default: window.innerHeight
 })
+
+export const derivedWidth = atom<number>({
+    key: 'derivedWidth',
+    default: window.innerWidth - 80
+})

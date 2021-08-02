@@ -62,9 +62,6 @@ const MySidebar: FunctionComponent = (props: any) => {
                 changeHandler={handleChange}
                 />
             </SidebarContent>
-            <SidebarFooter>
-                <MySidebarFooter />
-            </SidebarFooter>
         </ProSidebar>
     )
 }
