@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { sidebarWidth as sw, collapsed as c, toggled as t } from '../Recoil/sidebar'
 
@@ -8,15 +8,12 @@ const useSidebarWidth: Function = () => {
     const collapsed: boolean = useRecoilValue(c);
     const toggled: boolean = useRecoilValue(t);
       
-    useEffect(() => {
-        if(toggled && collapsed) {
+    useLayoutEffect(() => {
+        if(collapsed) {
             setSidebarWidth(80)
         }
-        if(toggled && !collapsed) {
+        if(!collapsed) {
             setSidebarWidth(270)
-        }
-        if(!toggled) {
-            setSidebarWidth(0)
         }
 
     }, [collapsed, toggled])

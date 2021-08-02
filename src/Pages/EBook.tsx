@@ -1,27 +1,21 @@
 import { FunctionComponent, MutableRefObject, useRef } from "react";
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { Button, Table } from "react-bootstrap";
-import { eBookDims, activePage, activeChapter, getPageCount, getChapterCount, chapterSelector, pageSelector } from '../Recoil/eBook'
-import useEBookViewport from "../utils/useEBookViewport";
+import { activePage, activeChapter, getPageCount, getChapterCount, chapterSelector, pageSelector } from '../Recoil/eBook'
 import { currentView } from "../Recoil/views";
-import { Page, Chapter } from '../types/types'
 import PagePreviewEditor from "../Components/PagePreviewEditor";
 import TableOfContents from "../Components/eBook/TableOfContents";
 
 const EBook: FunctionComponent = (props:any) => {
 
-    const eBookRef: MutableRefObject<any> = useRef(null)
-    useEBookViewport(eBookRef)
     const [view, setView] = useRecoilState<string>(currentView)
     const [page, setPage] = useRecoilState<any>(activePage)
     const [chapt, setChapt] = useRecoilState<any>(activeChapter)
     const totalChapters: number = useRecoilValue(getChapterCount)
     const totalPages: number = useRecoilValue(getPageCount)
-    const dims = useRecoilValue(eBookDims)
 
     const currentPage: any = useRecoilValue(pageSelector(page))
     const currentChapt: any = useRecoilValue(chapterSelector(chapt))
-    console.log(currentChapt)
 
     const handleEvent = (event: string) => {
         switch(event) {
@@ -68,7 +62,7 @@ const EBook: FunctionComponent = (props:any) => {
 
     const ButtonsDiv = () => {
         return(
-            <Table style={{margin: '0 auto', maxWidth: dims.width * .5}}>
+            <Table style={{margin: '0 auto'}}>
                 <thead>
                     <tr style={{textAlign: 'center'}}>
                         <td>
@@ -100,7 +94,7 @@ const EBook: FunctionComponent = (props:any) => {
 
 
     return(
-        <div ref={eBookRef}>
+        <div style={{margin: '0 auto'}}>
             <h1 style={{textAlign: 'center'}}>Ebook Component</h1>
             <br/>
             {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>Chapter {chapt} of {totalChapters}</h3>}
@@ -111,8 +105,6 @@ const EBook: FunctionComponent = (props:any) => {
             {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>Current Page: {page} of {totalPages}</h3>}
             <br/>
             {ButtonsDiv()}
-            <br/>
-            <Button variant='info' onClick={() => setView('landing')}>Landing Page</Button>
         </div>
     )
 }

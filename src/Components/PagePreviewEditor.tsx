@@ -10,7 +10,7 @@ interface PropTypes {
 const PagePreviewEditor: Function = (props:PropTypes) => {
 
     return(
-        <div style={{margin: '0 auto', maxWidth: window.screen.availWidth*.6}}>
+        <div style={{margin: '0 auto', maxWidth: window.screen.availWidth*.9}}>
             <Editor
                     editorStyle={{borderStyle: 'solid', borderWidth: '2px', borderColor: '#aaa', backgroundColor: '#eee'}}
                     editorState={EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(props.displayText).contentBlocks))}

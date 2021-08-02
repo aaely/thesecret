@@ -7,7 +7,7 @@ import { RecoilRoot } from 'recoil'
 import Loader from './Components/Loader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-localStorage.clear()
+//localStorage.clear()
 
 ReactDOM.render(
   

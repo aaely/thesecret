@@ -8,8 +8,7 @@ const { persistAtom } = recoilPersist({
 
   export const sidebarWidth = atom<number>({
     key: 'sidebarWidth',
-    default: 50,
-    effects_UNSTABLE: [persistAtom]
+    default: 80
   })
 
   export const bgImage = atom<string>({
@@ -31,12 +30,12 @@ const { persistAtom } = recoilPersist({
   
   export const collapsed = atom<boolean>({
     key: 'collapsed',
-    default: false,
+    default: true,
     effects_UNSTABLE: [persistAtom]
   })
 
   export const toggled = atom<boolean>({
     key: 'collapsed',
-    default: false,
+    default: true,
     effects_UNSTABLE: [persistAtom]
   })

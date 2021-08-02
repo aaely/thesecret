@@ -30,12 +30,26 @@ const AboutThisApp: FunctionComponent = (props:any) => {
                         <li>
                             <a href='https://react-spring.io/'>React Spring</a>
                         </li>
-                        <li>
-                            <a href='https://formidable.com/open-source/renature/'>Renature</a>
-                        </li>
                     </ul>
                 </li>
             </ul>
+            <h5 style={{textAlign: 'center'}}>Back End</h5>
+                <ul>
+                    <li>
+                        Solidity:
+                            <ul>
+                                <li>
+                                    <a href='https://docs.soliditylang.org/'>Solidity</a>
+                                </li>
+                            </ul>
+                    </li>
+                </ul>
+            <h5 style={{textAlign: 'center'}}>Database</h5>
+                <ul>
+                    <li>
+                        <a href='https://ethereum.org/'>Ethereum</a>
+                    </li>
+                </ul>
         </div>
     )
 

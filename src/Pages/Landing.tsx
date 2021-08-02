@@ -18,7 +18,7 @@ const Landing: FunctionComponent = (props:any) => {
     const fetchAccount: string = useRecoilValue(getAccount)
     const chapterCt: number = useRecoilValue(getChapterCount)
     const [currentChapter, setCurrentChapter] = useRecoilState<number>(activeChapter)
-    console.log(methods)
+
     useEffect(() => {
         if(loading) {
             setAcct(fetchAccount)
@@ -65,7 +65,7 @@ const Landing: FunctionComponent = (props:any) => {
     }
 
     return(
-        <>
+        <div style={{margin: '0 auto'}}>
             <p style={{textAlign: 'center'}}>Current Chapter: {currentChapter}</p>
             <MyEditor />
             <br/>
@@ -78,7 +78,9 @@ const Landing: FunctionComponent = (props:any) => {
             <br/>
             {currentChapter > 0 && <Button variant='danger' onClick={() => handleChapter('dec')}>Decrement Chapter</Button>}
             {currentChapter < chapterCt && <Button variant='success' onClick={() => handleChapter('inc')}>Increment Chapter</Button>}
-        </>
+            <Button variant='success' onClick={() => setView('editpage')}>Edit Page</Button>
+            <Button variant='success' onClick={() => setView('about')}>App Info</Button>
+        </div>
     )
 
 }
