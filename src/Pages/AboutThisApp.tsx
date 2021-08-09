@@ -7,12 +7,12 @@ const AboutThisApp: FunctionComponent = (props:any) => {
 
     return(
         <div>
-            <h1 style={{textAlign: 'center', marginTop: window.screen.availHeight * .03}}>About this Application</h1>
+            <h1 style={{textAlign: 'center', marginTop: '3%'}}>About this Application</h1>
             <br/>
             <h3 style={{textAlign: 'center'}}>The Stack</h3>
             <br/>
             <h5 style={{textAlign: 'center'}}>Front End</h5>
-            <ul style={{marginLeft: window.screen.availWidth * .05}}>
+            <ul style={{marginLeft: '5%'}}>
                 <li>
                     State Management:
                     <ul>

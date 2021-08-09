@@ -45,7 +45,7 @@ const MySidebar: FunctionComponent = (props: any) => {
 
     return (
         <ProSidebar
-        style={{position: 'fixed'}}
+        style={{position: 'absolute'}}
         rtl={rtl}
         collapsed={collapsed}
         toggled={toggled}

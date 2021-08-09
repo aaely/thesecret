@@ -1,10 +1,12 @@
-import { useState, useRef, MutableRefObject } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useState, useEffect, useRef, MutableRefObject } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { currentView } from '../Recoil/views'
-import PagePreviewEditor from '../Components/PagePreviewEditor'
-import { useTransition, animated } from 'react-spring'
+import PagePreviewEditor from './PagePreviewEditor'
+import { useTransition, animated, useSprings } from 'react-spring'
+import { useDrag } from 'react-use-gesture'
 import { Button } from 'react-bootstrap'
 import styled from 'styled-components'
+import clamp from 'lodash.clamp'
 
 
 const pages: Array<string> = [
@@ -17,16 +19,12 @@ const pages: Array<string> = [
 ]
 
 const Wrapper = styled.div `
-    max-width: 100%;
-    position: fixed;
+    max-height: ${window.innerHeight};
+    max-width: 90%;
+    position: absolute;
     will-change: transform, box-shadow;
-    display: block;
-    padding-left: 1%;
-    padding-right: 1%;
-    margin-right: 1%;
-    padding-bottom: 3%;
+    display: flex;
     overflow-x: hidden;
-    overflow-y: auto;
     cursor: url('https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png') 39 39, auto;
 `;
 
@@ -34,10 +32,9 @@ interface Page {
     setCurrentPage: Function,
 }
 
-const Static: Function = (localProps: Page) => {
+const StaticComponent: Function = (localProps: Page) => {
 
     const [currentPage, setCurrentPage] = useState<number>(0)
-    const topRef: MutableRefObject<any> = useRef(null)
 
     /*const index = useRef(0)
     const [props, set] = useSprings(pages.length, (i) => ({
@@ -68,46 +65,27 @@ const Static: Function = (localProps: Page) => {
         leave: {opacity: 0, transform: 'translate3d(-50%,0,0)'}
     })
 
-    const handleClick = () => {
-        if(currentPage < pages.length - 1) {
-            setCurrentPage(currentPage + 1)
-            topRef.current.scrollIntoView()
-            return
-        }
-        if(currentPage === pages.length - 1) {
-            setCurrentPage(0)
-            topRef.current.scrollIntoView()
-            return
-        }
-    }
-
     const handleMouseOver = () => {
-        setBoxShadow('0px 6px 20px -5px rgba(0, 0, 0, 0.4)')
+
     }
 
     const handleMouseLeave = () => {
-        setBoxShadow('0px 3px 10px -2px rgba(0, 0, 0, 0.4)')
+
     }
 
     return(
-        <div style={{position: 'absolute', overflowX: 'hidden', width: '100%', height: '100%'}}>
-            <h3 style={{textAlign: 'center'}}>Static Version</h3>
-            <br/>
-            <h4 ref={topRef} style={{textAlign: 'center'}}>Page {currentPage + 1} of 6</h4>
-            <br/>
-            {currentPage > 0 && <Button variant='warning' style={{margin: '0 auto', display: 'block'}} onClick={() => setCurrentPage(currentPage - 1)}>Previous Page</Button>}
-            <br/>
+        <>
             {transition((style, i) => {
                 return(
                     <animated.div style={style}>
-                        <Wrapper onClick={handleClick} style={{boxShadow: boxShadow}} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} >
-                            <PagePreviewEditor displayText ={i} />
+                        <Wrapper style={{boxShadow: boxShadow}} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} >
+                            {i}
                         </Wrapper>
                     </animated.div>
                 )
             })}
-        </div>
+        </>
     )
 }
 
-export default Static
+export default StaticComponent

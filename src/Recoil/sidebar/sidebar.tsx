@@ -18,7 +18,7 @@ const { persistAtom } = recoilPersist({
   })
 
   export const image = atom<boolean>({
-    key: '',
+    key: 'image',
     default: false,
     effects_UNSTABLE: [persistAtom]
   })
@@ -35,7 +35,7 @@ const { persistAtom } = recoilPersist({
   })
 
   export const toggled = atom<boolean>({
-    key: 'collapsed',
+    key: 'toggled',
     default: true,
     effects_UNSTABLE: [persistAtom]
   })

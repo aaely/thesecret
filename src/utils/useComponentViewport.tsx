@@ -5,12 +5,14 @@ const useComponentViewport: Function = (ref: MutableRefObject<any>) => {
 
     useLayoutEffect(() => {
         const handleResize = () => {
-            setDims({width: ref.current.offsetWidth, height: ref.current.offsetHeight})
+            if(ref.current) {
+                setDims({width: ref.current.offsetWidth, height: ref.current.offsetHeight})
+            }
         }
 
-        /*if(ref.current) {
+        if(ref.current) {
             setDims({width: ref.current.offsetWidth, height: ref.current.offsetHeight})
-        }*/
+        }
 
         window.addEventListener('resize', handleResize)
 

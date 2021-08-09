@@ -3,7 +3,7 @@ import { recoilPersist } from "recoil-persist";
 import loadWeb3 from "../utils/loadWeb3";
 import loadAccount from "../utils/loadAccount";
 import loadeBook from "../utils/loadeBook";
-import { Chapter } from "../types/types";
+import { forceUpdate } from ".";
 
 const { persistAtom } = recoilPersist({
     key: 'recoil-persist', // this key is using to store data in local storage
@@ -112,6 +112,7 @@ const { persistAtom } = recoilPersist({
                 return response
             } catch (error) {
                 console.log(error)
+
             }
         }
     })
@@ -138,9 +139,4 @@ const { persistAtom } = recoilPersist({
                 console.log(error)
             }
         }
-    })
-
-    export const forceUpdate = atom<number>({
-        key: 'forceUpdate',
-        default: 0
     })
