@@ -12,11 +12,11 @@ import Slide4 from '../Components/LandingSlides/Slide4'
 import Slide5 from '../Components/LandingSlides/Slide5'
 
 const images = [
-    '/sunset.jpg',
-    '/cathedralRock.jpg',
-    '/lovellCanyon.jpg',
-    '/kernRiver.JPG',
-    '/redRock.jpg'
+    'Qmat6VsjhTBqraBzafcFGxUE6mXckrUxyqDr7qbfhk56Bp',
+    'QmNwtexfhK2rmynJrtbTj43CfQp11FRDJ682DRYWaDo5PZ',
+    'QmSLg8PUZM9SsLAwVrRMBKRUgmgtqpbvTCXomfXwz8mDmp',
+    'Qmd5XpRx8rAvnfrCeq1DDDHTgw4h6aMK3rQPsjHN1J3o9k',
+    'QmbiMVVgZjt7yr2MsusbMpT7wGS2ZPweVPxTsHJtKFCyEn'
 ]
 
 const slides = [
@@ -50,7 +50,7 @@ const Boarding: FunctionComponent = (props:any) => {
         <>
             {transition((style, i) => {
                 return(
-                    <animated.div style={{...style, top: 0, left: 0, width: '100vw', height: '100vh', backgroundImage: `url(${images[i]})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', overflow: 'hidden', position: 'absolute'}}>
+                    <animated.div style={{...style, top: 0, left: 0, width: '100vw', height: '100vh', backgroundImage: `url(https://ipfs.io/ipfs/${images[i]})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', overflow: 'hidden', position: 'absolute'}}>
                             {slides[i]}
                     </animated.div>
                 )

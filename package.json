@@ -16,6 +16,7 @@
     "gestalt": "^29.1.0",
     "html-to-draft": "^0.1.6",
     "install": "^0.13.0",
+    "ipfs-http-client": "^51.0.1",
     "lodash.clamp": "^4.0.3",
     "npm": "^7.19.1",
     "react": "^17.0.2",

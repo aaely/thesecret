@@ -7,6 +7,7 @@ import EditPage from './Pages/EditPage';
 import AboutThisApp from './Pages/AboutThisApp';
 import 'react-pro-sidebar/dist/css/styles.css';
 import Static from './Pages/Static';
+import ImageUpload from './Pages/ImageUpload'
 import { useTransition, animated } from 'react-spring'
 
 const hashMap = new Map([
@@ -14,6 +15,7 @@ const hashMap = new Map([
   ['ebook', <EBook/>],
   ['about', <AboutThisApp/>],
   ['static', <Static/>],
+  ['upload', <ImageUpload/>]
 ])
 
 function App() {
