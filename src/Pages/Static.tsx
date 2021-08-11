@@ -28,6 +28,7 @@ const Wrapper = styled.div `
     overflow-x: hidden;
     overflow-y: auto;
     cursor: url('https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png') 39 39, auto;
+    -webkit-overflow-scrolling: touch;
 `;
 
 interface Page {
@@ -90,7 +91,7 @@ const Static: Function = (localProps: Page) => {
     }
 
     return(
-        <div style={{position: 'absolute', overflowX: 'hidden', width: '100%', height: '100%'}}>
+        <div style={{position: 'absolute', overflowX: 'hidden', width: '100%', height: '100%', WebkitOverflowScrolling: 'touch'}}>
             <h3 style={{textAlign: 'center'}}>Static Version</h3>
             <br/>
             <h4 ref={topRef} style={{textAlign: 'center'}}>Page {currentPage + 1} of 6</h4>
