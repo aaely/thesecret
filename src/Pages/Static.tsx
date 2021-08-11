@@ -18,7 +18,7 @@ const pages: Array<string> = [
 
 const Wrapper = styled.div `
     max-width: 100%;
-    position: fixed;
+    position: absolute;
     will-change: transform, box-shadow;
     display: block;
     padding-left: 1%;
