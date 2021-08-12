@@ -9,6 +9,6 @@ export default async function loadWeb3() {
       window.web3 = new Web3(window.web3.currentProvider)
     }
     else {
-      window.alert('Non-Ethereum browser detected. You need MetaMask to make use of this site!')
+      window.web3 = new Web3('wss://kovan.infura.io/ws/v3/83b3c94d24b244039493a50ec4e66362')
     }
   }

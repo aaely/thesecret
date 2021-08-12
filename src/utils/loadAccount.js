@@ -7,6 +7,5 @@ export default async function loadAccount() {
         return userAccount
     } catch (error) {
         console.log(error)
-        return 'boarding'
     }
 }

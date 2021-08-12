@@ -8,7 +8,7 @@ const Slide4: Function = (props: any) => {
 
     return(
         <>
-            <h1 style={{textAlign: 'center', marginTop:'10%'}}>There is no longer any possible argument for the need of indentured servants. We need programmers, which this cult stifles the development of.</h1>
+            <h1 style={{textAlign: 'center', marginTop:'10%'}}>There is no longer any possible argument for the need of indentured servants. We need programmers to automate tasks, and this cult stifles their mental development.</h1>
         </>
     )
 }

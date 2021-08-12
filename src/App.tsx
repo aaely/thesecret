@@ -6,6 +6,7 @@ import EBook from './Pages/EBook';
 import AboutThisApp from './Pages/AboutThisApp';
 import Static from './Pages/Static';
 import ImageUpload from './Pages/ImageUpload'
+import EditPage from './Pages/EditPage';
 import { useTransition, animated } from 'react-spring'
 
 const hashMap = new Map([
@@ -13,7 +14,8 @@ const hashMap = new Map([
   ['ebook', <EBook/>],
   ['about', <AboutThisApp/>],
   ['static', <Static/>],
-  ['upload', <ImageUpload/>]
+  ['upload', <ImageUpload/>],
+  ['edit', <EditPage/>]
 ])
 
 function App() {

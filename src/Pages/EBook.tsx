@@ -1,15 +1,18 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useRef, MutableRefObject } from "react";
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { Button, Table } from "react-bootstrap";
-import { activePage, activeChapter, getPageCount, getChapterCount, chapterSelector, pageSelector } from '../Recoil'
+import { activePage, activeChapter, getPageCount, getChapterCount, chapterSelector, pageSelector, getAccount } from '../Recoil'
 import { currentView } from "../Recoil/views";
+import { useTransition, animated } from 'react-spring'
 import styled from 'styled-components'
 import PagePreviewEditor from "../Components/PagePreviewEditor";
 import TableOfContents from "../Components/eBook/TableOfContents";
 
 const Wrapper = styled.div `
-    max-width: 100%;
+    position: absolute;
+    width: 100%;
     will-change: box-shadow;
+    display: block;
     margin-left: 1%;
     padding-left: 1%;
     padding-right: 1%;
@@ -28,6 +31,7 @@ const EBook: FunctionComponent = (props:any) => {
         }
     }, [])
 
+    const topRef: MutableRefObject<any> = useRef(null)
     const [view, setView] = useRecoilState<string>(currentView)
     const [page, setPage] = useRecoilState<any>(activePage)
     const [chapt, setChapt] = useRecoilState<any>(activeChapter)
@@ -40,19 +44,27 @@ const EBook: FunctionComponent = (props:any) => {
     const handleEvent = (event: string) => {
         switch(event) {
             case 'nextPage': {
-                if(currentChapt.pages[currentChapt.pages.length - 1] == page){
+                if(currentChapt.pages[currentChapt.pages.length - 1] == page < totalPages){
                     setPage(parseInt(page) + 1)
                     setChapt(parseInt(chapt) + 1)
+                    topRef.current.scrollIntoView()
                     break;
                 }
                 if(page === 0) {
                     setPage(1)
                     setChapt(1)
+                    topRef.current.scrollIntoView()
                     break;
                 }
-                if(currentChapt.pages[currentChapt.pages.length - 1] > page) {
+                if(currentChapt.pages[currentChapt.pages.length - 1] > page && page < totalPages) {
                     setPage(page + 1)
+                    topRef.current.scrollIntoView()
                     break;
+                }
+                if(page == totalPages) {
+                    setPage(0)
+                    topRef.current.scrollIntoView()
+                    break
                 }
                 break;
             }
@@ -91,45 +103,53 @@ const EBook: FunctionComponent = (props:any) => {
                         <td>
                             {page > 0 && <Button variant='warning' onClick={() => handleEvent('previousPage')}>Previous Page</Button>}
                         </td>
-                        <td>
-                            {page < totalPages && <Button variant='info' onClick={() => handleEvent('nextPage')}>Next Page</Button>}
-                        </td>
                     </tr>
                 </thead>
             </Table>
         )
     }
 
+    const transition = useTransition(currentPage.content, {
+        from: {opacity: 0, transform: 'translate3d(50%,0,0)'},
+        enter: {opacity: 1, transform: 'translate3d(0,0,0)'},
+        leave: {opacity: 0, transform: 'translate3d(-50%,0,0)'}
+    })
+
     const renderContent = () => {
         if(page === 0) {
-            return <TableOfContents />
+            return transition((style, i) => {
+                return(
+                <animated.div style={style}>
+                    <Wrapper onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} style={{boxShadow: boxShadow}}><TableOfContents /></Wrapper>
+                </animated.div>)
+            })
         }
         if(page > 0) {
-            return <div style={{padding: '1%'}}><PagePreviewEditor displayText={currentPage.content} /></div>
-        }
-        if(!page) {
-            return <p>Unable to retrieve page number. Check Ethereum network connection.</p>
+            return transition((style, i) => {
+                return(
+                <animated.div style={style}>
+                    <Wrapper onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} onClick={() => handleEvent('nextPage')} style={{boxShadow: boxShadow}}><PagePreviewEditor displayText={i} /></Wrapper>
+                </animated.div>)
+                })
         }
     }
 
     const [boxShadow, setBoxShadow] = useState<string>('0px 3px 10px -2px rgba(0, 0, 0, 0.4)')
     const handleMouseOver = () => setBoxShadow('0px 6px 20px -5px rgba(0, 0, 0, 0.4)')
     const handleMouseLeave = () => setBoxShadow('0px 3px 10px -2px rgba(0, 0, 0, 0.4)')
+    
     return(
-        <div style={{margin: '0 auto'}}>
-            <Button onClick={() => setView('boarding')}>Boarding</Button>
-            <h1 style={{textAlign: 'center'}}>Ebook Component</h1>
+        <div style={{position: 'absolute', overflowX: 'hidden', padding: '1%', width: '100%', height: '100%', WebkitOverflowScrolling: 'touch'}}>
+            <h3 style={{textAlign: 'center', marginTop: '1%', marginBottom: '1%'}}>Powered By <a href='https://ethereum.org' target='_blank'>Ethereum</a> and <a href='https://ipfs.io' target='_blank'>IPFS</a></h3>
             <br/>
             {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>Chapter {chapt} of {totalChapters}</h3>}
             {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>{currentChapt.title}</h3>}
             <br/>
-            <Wrapper onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} style={{boxShadow: boxShadow}}>
-                {renderContent()}
-            </Wrapper>
-            <br/>
-            {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>Page {page} of {totalPages}</h3>}
+            {chapt > 0 && page > 0 && <h3 ref={topRef} style={{textAlign: 'center'}}>Page {page} of {totalPages}</h3>}
             <br/>
             {ButtonsDiv()}
+            <br/>
+            {renderContent()}
         </div>
     )
 }
