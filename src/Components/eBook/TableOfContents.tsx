@@ -37,7 +37,6 @@ const TableOfContents: Function = (props: any) => {
                 </thead>
                 <tbody>
                     {chapters && chapters.map((chapter: Chapter) => {
-                        console.log(chapters)
                         return(
                             <tr key={chapter.chapterId}>
                                 <td>

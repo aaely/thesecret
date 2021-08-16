@@ -8,6 +8,6 @@ const { persistAtom } = recoilPersist({
 
 export const currentView = atom<string>({
     key: 'currentView',
-    default: 'boarding',
+    default: 'ebook',
     effects_UNSTABLE: [persistAtom]
 })

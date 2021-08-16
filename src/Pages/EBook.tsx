@@ -25,12 +25,6 @@ const Wrapper = styled.div `
 
 const EBook: FunctionComponent = (props:any) => {
 
-    useEffect(() => {
-        if(!totalChapters) {
-            setView('boarding')
-        }
-    }, [])
-
     const topRef: MutableRefObject<any> = useRef(null)
     const [view, setView] = useRecoilState<string>(currentView)
     const [page, setPage] = useRecoilState<any>(activePage)
@@ -109,7 +103,7 @@ const EBook: FunctionComponent = (props:any) => {
         )
     }
 
-    const transition = useTransition(currentPage.content, {
+    const transition = useTransition(currentPage, {
         from: {opacity: 0, transform: 'translate3d(50%,0,0)'},
         enter: {opacity: 1, transform: 'translate3d(0,0,0)'},
         leave: {opacity: 0, transform: 'translate3d(-50%,0,0)'}
@@ -128,7 +122,7 @@ const EBook: FunctionComponent = (props:any) => {
             return transition((style, i) => {
                 return(
                 <animated.div style={style}>
-                    <Wrapper onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} onClick={() => handleEvent('nextPage')} style={{boxShadow: boxShadow}}><PagePreviewEditor displayText={i} /></Wrapper>
+                    <Wrapper onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} onClick={() => handleEvent('nextPage')} style={{boxShadow: boxShadow}}><PagePreviewEditor displayText={i.content} /></Wrapper>
                 </animated.div>)
                 })
         }
@@ -140,7 +134,7 @@ const EBook: FunctionComponent = (props:any) => {
     
     return(
         <div style={{position: 'absolute', overflowX: 'hidden', padding: '1%', width: '100%', height: '100%', WebkitOverflowScrolling: 'touch'}}>
-            <h3 style={{textAlign: 'center', marginTop: '1%', marginBottom: '1%'}}>Powered By <a href='https://ethereum.org' target='_blank'>Ethereum</a> and <a href='https://ipfs.io' target='_blank'>IPFS</a></h3>
+            <h3 style={{textAlign: 'center', marginTop: '1%', marginBottom: '1%'}}>Powered By <a href='https://ethereum.org' target='_blank'>Ethereum</a>, <a href='https://ipfs.io' target='_blank'>IPFS</a>, and <a href='https://infura.io' target='_blank'>Infura</a></h3>
             <br/>
             {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>Chapter {chapt} of {totalChapters}</h3>}
             {chapt > 0 && page > 0 && <h3 style={{textAlign: 'center'}}>{currentChapt.title}</h3>}

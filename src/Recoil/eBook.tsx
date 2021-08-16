@@ -43,14 +43,12 @@ const { persistAtom } = recoilPersist({
 
     export const activePage = atom<number>({
         key: 'activePage',
-        default: 0,
-        effects_UNSTABLE: [persistAtom]
+        default: 0
     })
 
     export const activeChapter = atom<number>({
         key: 'activeChapter',
-        default: 0,
-        effects_UNSTABLE: [persistAtom]
+        default: 0
     })
 
     export const workingChapter = atom<number>({
@@ -63,10 +61,8 @@ const { persistAtom } = recoilPersist({
         key: 'getChapterCount',
         get: async ({get}) => {
             try {
-                get(forceUpdate)
                 const methods: any = get(initializeeBook)
                 const response = await methods.chapterCount().call()
-                console.log(response)
                 return response
             } catch(error) {
                 console.log(error)
@@ -78,7 +74,6 @@ const { persistAtom } = recoilPersist({
         key: 'getPageCount',
         get: async ({get}) => {
             try {
-                get(forceUpdate)
                 const methods: any = get(initializeeBook)
                 const response = await methods.pageCount().call()
                 return response
@@ -92,7 +87,6 @@ const { persistAtom } = recoilPersist({
         key: 'chapterSelector',
         get: param => async ({get}) => {
             try {
-                get(forceUpdate)
                 const methods: any = get(initializeeBook)
                 const response = await methods.fetchChapter(param).call()
                 return response
@@ -106,20 +100,13 @@ const { persistAtom } = recoilPersist({
         key: 'pageSelector',
         get: param => async ({get}) => {
             try {
-                get(forceUpdate)
                 const methods: any = get(initializeeBook)
                 const response = await methods.getPage(param).call()
                 return response
             } catch (error) {
                 console.log(error)
-
             }
         }
-    })
-
-    export const eBookDims = atom({
-        key: 'eBookDims',
-        default: {width: 0, height: 0}
     })
 
     export const getAllChapters = selector({
@@ -128,7 +115,6 @@ const { persistAtom } = recoilPersist({
             try {
                 let chapters: any = []
                 const methods: any = get(initializeeBook)
-                console.log(methods)
                 const loopCount: any = get(getChapterCount)
                 for(let i: number = 1; i <= loopCount; i++) {
                     const chapter = await methods.fetchChapter(i).call()
